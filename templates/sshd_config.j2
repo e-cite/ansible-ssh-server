@@ -131,3 +131,6 @@ Subsystem	sftp	/usr/lib/openssh/sftp-server
 #	AllowTcpForwarding no
 #	PermitTTY no
 #	ForceCommand cvs server
+
+Match Address {{ ssh_server__private_ip_range }}
+    AuthenticationMethods publickey
