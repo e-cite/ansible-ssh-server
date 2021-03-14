@@ -1,0 +1,20 @@
+---
+galaxy_info:
+  author: Andreas Dolp
+  description: "Installiert und konfiguriert einen SSH-Server auf einem
+    Debian host."
+  company: -/-
+  license: MIT
+
+  min_ansible_version: 2.9
+
+  platforms:
+    - name: Debian
+      versions:
+        - buster
+
+  galaxy_tags:
+    - ssh
+    - network
+
+  dependencies:

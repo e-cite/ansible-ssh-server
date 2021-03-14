@@ -1,0 +1,22 @@
+---
+- name: Include OS vars
+  include_vars:
+    "{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.yaml"
+
+- name: Install packages
+  ansible.builtin.package:
+    name: "{{ ssh_server__packages }}"
+    state: "present"
+
+- name: Set config "{{ ssh_server__config_file }}"
+  ansible.builtin.template:
+    src: sshd_config.j2
+    dest: "{{ ssh_server__config_file }}"
+    mode: 0644
+  notify: restart sshd
+
+- name: Enable service "{{ ssh_server__service }}" on boot
+  ansible.builtin.service:
+    name: "{{ ssh_server__service }}"
+    state: "started"
+    enabled: "true"

@@ -1,0 +1,4 @@
+---
+ssh_server__packages: "{{ ssh_server__default_packages }}"
+ssh_server__config_file: "{{ ssh_server__default_config_file }}"
+ssh_server__service: "{{ ssh_server__default_service }}"
