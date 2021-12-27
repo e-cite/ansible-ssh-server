@@ -1,5 +1,9 @@
 ---
-- name: Include OS vars
+- name: Include OS family vars
+  include_vars:
+    "{{ ansible_os_family }}.yaml"
+
+- name: Include OS distribution vars
   include_vars:
     "{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.yaml"
 
@@ -10,7 +14,8 @@
 
 - name: Set config "{{ ssh_server__config_file }}"
   ansible.builtin.template:
-    src: sshd_config.j2
+    src: "{{ ansible_os_family }}-{{ ansible_distribution_major_version }}/\
+      sshd_config.j2"
     dest: "{{ ssh_server__config_file }}"
     mode: 0644
   notify: restart sshd
