@@ -11,8 +11,6 @@ galaxy_info:
   platforms:
     - name: Debian
       versions:
-        - buster
-        - bullseye
         - bookworm
 
   galaxy_tags:
@@ -20,3 +18,4 @@ galaxy_info:
     - network
 
   dependencies:
+...

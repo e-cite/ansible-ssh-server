@@ -2,9 +2,6 @@
 - ansible.builtin.include_vars:
     "{{ ansible_os_family }}.yaml"
 
-- ansible.builtin.include_vars:
-    "{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.yaml"
-
 - name: Install packages
   ansible.builtin.package:
     name: "{{ ssh_server__packages }}"
@@ -12,8 +9,7 @@
 
 - name: Set config "{{ ssh_server__config_file }}"
   ansible.builtin.template:
-    src: "{{ ansible_os_family }}-{{ ansible_distribution_major_version }}/\
-      sshd_config.j2"
+    src: sshd_config.j2
     dest: "{{ ssh_server__config_file }}"
     mode: 0644
   notify: restart sshd
@@ -23,3 +19,4 @@
     name: "{{ ssh_server__service }}"
     state: "started"
     enabled: "true"
+...

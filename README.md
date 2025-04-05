@@ -8,12 +8,21 @@ Keine.
 
 ## Variablen
 
-- `ssh_server__private_ip_range`: (*Erforderlich*)
+- `ssh_server__sshdconf`: (*Erforderlich*)
 
-  Privater IP-Adressbereich, aus welchem keine 2FA bei SSH erforderlich ist.
+  Dict mit allen Parametern der `/etc/ssh/sshd_config`.
+  Default-Werte aus Debian Bookworm DEB-Package wie im Beispiel.
+
   ~~~yaml
   # Beispiel:
-  ssh_server__private_ip_range: "192.168.1.0/24"
+  ssh_server__sshdconf:
+    Include: /etc/ssh/sshd_config.d/*.conf
+    KbdInteractiveAuthentication: false
+    UsePAM: true
+    X11Forwarding: true
+    PrintMotd: false
+    AcceptEnv: LANG LC_*
+    Subsystem: sftp /usr/lib/openssh/sftp-server
   ~~~
 
 ## Abhängigkeiten

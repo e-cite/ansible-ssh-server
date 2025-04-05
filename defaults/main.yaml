@@ -1,4 +1,13 @@
 ---
 ssh_server__packages: "{{ ssh_server__default_packages }}"
 ssh_server__config_file: "{{ ssh_server__default_config_file }}"
+ssh_server__sshdconf:
+  Include: /etc/ssh/sshd_config.d/*.conf
+  KbdInteractiveAuthentication: false
+  UsePAM: true
+  X11Forwarding: true
+  PrintMotd: false
+  AcceptEnv: LANG LC_*
+  Subsystem: sftp /usr/lib/openssh/sftp-server
 ssh_server__service: "{{ ssh_server__default_service }}"
+...

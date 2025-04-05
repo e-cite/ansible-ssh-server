@@ -1,0 +1,23 @@
+# {{ ansible_managed }}
+{% macro print_kv(key,value,indent="") %}
+{% if value is boolean %}
+{% set value = 'yes' if value else 'no' %}
+{% endif %}
+{{ indent }}{{ key }} {{ value }}
+{%- endmacro %}
+
+{% for key,value in ssh_server__sshdconf.items() %}
+{%   if value is iterable and value is not string and value is not mapping %}
+{%     for listelem in value %}
+{{ print_kv(key,listelem) }}
+{%     endfor %}
+{%   elif value is mapping %}
+{{ key }}
+{%     for subkey,subvalue in value.items() %}
+{{ print_kv(subkey,subvalue,"    ") }}
+{%     endfor %}
+{%   else %}
+{{ print_kv(key,value) }}
+{%   endif %}
+{% endfor %}
+
